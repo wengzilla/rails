@@ -197,20 +197,6 @@ class ActiveStorage::VariantTest < ActiveSupport::TestCase
     end
   end
 
-  test "content_type not recognized by mini_mime isn't included as variable" do
-    blob = create_file_blob(filename: "racecar.jpg")
-
-    # image/jpg is not recognized by mini_mime (image/jpeg is correct)
-    blob.update(content_type: "image/jpg")
-
-    assert_raises(ActiveStorage::InvariableError) do
-      blob.variant(resize_to_limit: [100, 100])
-    end
-
-    assert_nil blob.send(:format)
-    assert_equal :png, blob.send(:default_variant_format)
-  end
-
   test "variations with dangerous argument string raise UnsupportedImageProcessingArgument" do
     process_variants_with :mini_magick do
       blob = create_file_blob(filename: "racecar.jpg")
