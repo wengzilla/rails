@@ -200,7 +200,7 @@ class ActiveStorage::VariantTest < ActiveSupport::TestCase
   test "content_type not recognized by marcel isn't included as variable" do
     blob = create_file_blob(filename: "racecar.jpg")
 
-    # image/jpg is not recognized by mini_mime (image/jpeg is correct)
+    # image/jpg is not recognized by marcel (image/jpeg is correct)
     blob.update(content_type: "image/jpg")
 
     assert_raises(ActiveStorage::InvariableError) do
