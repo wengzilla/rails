@@ -112,7 +112,7 @@ module ActiveStorage::Blob::Representable
     end
 
     def format
-      if filename.extension.present? && Marcel::MimeType.for(extension: filename.extension).to_s == content_type
+      if filename.extension.present? && Marcel::MimeType.for(extension: filename.extension) == content_type
         filename.extension
       else
         Marcel::Magic.new(content_type).extensions.first
